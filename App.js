@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,100 +7,154 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+//import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+import Home from './screens/Home';
+import Login from './screens/Login';
+import Kategori from './screens/Kategori';
+import Search from './screens/Search';
+import Profil from './screens/Profil';
+import Pesanan from './screens/Pesanan';
+import AuthLoading from './screens/AuthLoading';
+//import Payment from './screens/Payment';
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+//Home
+const HomeStack = createStackNavigator({
+  Home: Home,
 });
 
-export default App;
+//kategori
+const KategoriStack = createStackNavigator({
+  Kategori: Kategori,
+});
+
+//pesanan
+const PesananStack = createStackNavigator({
+  Pesanan: Pesanan,
+});
+
+const ProfilStack = createStackNavigator({
+  Profil: Profil,
+  Login: Login
+});
+
+const SearchStack = createStackNavigator({
+  Search: Search,
+});
+
+
+//seting tab
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      
+      return <Icon size={24}  name='md-home' color={tintColor}  />;
+    },
+  };
+};
+
+KategoriStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Kategori',    
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      
+      return <Icon size={24}  name='ios-albums' color={tintColor}  />;
+    },
+  };
+};
+
+SearchStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Search',    
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      
+      return <Icon size={24}  name='md-search' color={tintColor}  />;
+    },
+  };
+};
+
+PesananStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Pesanan',   
+    tabBarBadge: 3, 
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      
+      return <Icon size={24}  name='ios-cart' color={tintColor}  />;
+    },
+  };
+};
+
+ProfilStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 1) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Profil',    
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      
+      return <Icon size={24}  name='ios-contact' color={tintColor}  />;
+    },
+  };
+};
+
+//tab
+const Tab = createMaterialBottomTabNavigator({
+  HomeStack: HomeStack,
+  KategoriStack: KategoriStack,
+  SearchStack: SearchStack,
+  PesananStack: PesananStack,
+  ProfilStack: ProfilStack,
+}, {
+  initialRouteName: 'HomeStack',
+  activeColor: '#8b0000',
+  inactiveColor: '#dcdcdc',
+  shifting: true,
+  barStyle: { backgroundColor: '#fff', paddingBottom: 10 }
+})
+
+
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoading,
+      Tab: Tab
+    },
+    {
+      initialRouteName: 'AuthLoading',
+    }
+  )
+);

@@ -18,6 +18,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* DekormanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DekormanTests.m */; };
 		36C80483FB9DFC32E058AEA6 /* libPods-DekormanTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 922EBADEBBC2A7197FE9922C /* libPods-DekormanTests.a */; };
 		595FDF56E9E84AF6F412F4DA /* libPods-Dekorman.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE142FF9570E688C0D76E46 /* libPods-Dekorman.a */; };
+		69F7155723F3E13C0097B49C /* libReactNativeMidtrans.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F7155623F3E13C0097B49C /* libReactNativeMidtrans.a */; };
+		69F7156323F3E6980097B49C /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69F7156223F3E6970097B49C /* Ionicons.ttf */; };
 		B097ED2B207F1E17E6784FBF /* libPods-Dekorman-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF9B622D7CCB0B9843DBE6 /* libPods-Dekorman-tvOSTests.a */; };
 		FB87FA6DAA09A2B05A8D70E4 /* libPods-Dekorman-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A16AD366F3CDDFEF8D6248AE /* libPods-Dekorman-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,27 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "Dekorman-tvOS";
 		};
+		69F7155423F3E1210097B49C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = ReactNativeMidtrans;
+		};
+		69F7155D23F3E5D40097B49C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69F7155823F3E5D40097B49C /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
+		69F7155F23F3E5D40097B49C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69F7155823F3E5D40097B49C /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
+			remoteInfo = "RNVectorIcons-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +78,10 @@
 		2D02E47B1E0B4A5D006451C7 /* Dekorman-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dekorman-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Dekorman-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dekorman-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBDE0AAC3B2F770694333E9 /* Pods-Dekorman-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dekorman-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Dekorman-tvOS/Pods-Dekorman-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeMidtrans.xcodeproj; path = "../node_modules/@adrianha/react-native-midtrans/ios/ReactNativeMidtrans.xcodeproj"; sourceTree = "<group>"; };
+		69F7155623F3E13C0097B49C /* libReactNativeMidtrans.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactNativeMidtrans.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F7155823F3E5D40097B49C /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		69F7156223F3E6970097B49C /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		70F5117D675F820CB4F098D5 /* Pods-Dekorman-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dekorman-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Dekorman-tvOSTests/Pods-Dekorman-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B1B1F9E7A38D5B0796254BF /* Pods-Dekorman-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dekorman-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Dekorman-tvOS/Pods-Dekorman-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		905540178F6654BA8809C373 /* Pods-Dekorman.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dekorman.debug.xcconfig"; path = "Target Support Files/Pods-Dekorman/Pods-Dekorman.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F7155723F3E13C0097B49C /* libReactNativeMidtrans.a in Frameworks */,
 				595FDF56E9E84AF6F412F4DA /* libPods-Dekorman.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +167,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69F7155623F3E13C0097B49C /* libReactNativeMidtrans.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				FAE142FF9570E688C0D76E46 /* libPods-Dekorman.a */,
@@ -149,9 +178,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		69F7155123F3E1210097B49C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69F7155523F3E1210097B49C /* libReactNativeMidtrans.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69F7155923F3E5D40097B49C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69F7155E23F3E5D40097B49C /* libRNVectorIcons.a */,
+				69F7156023F3E5D40097B49C /* libRNVectorIcons-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				69F7155823F3E5D40097B49C /* RNVectorIcons.xcodeproj */,
+				69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -159,6 +207,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				69F7156223F3E6970097B49C /* Ionicons.ttf */,
 				13B07FAE1A68108700A75B9A /* Dekorman */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* DekormanTests */,
@@ -194,7 +243,6 @@
 				A106243BAA69B2EBFAACBC16 /* Pods-DekormanTests.debug.xcconfig */,
 				2B94841D0B3BF4D4F373BE5E /* Pods-DekormanTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -230,6 +278,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				5B55E22460380E9CDBBEE3CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,12 +357,23 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 69F7155123F3E1210097B49C /* Products */;
+					ProjectRef = 69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */;
+				},
+				{
+					ProductGroup = 69F7155923F3E5D40097B49C /* Products */;
+					ProjectRef = 69F7155823F3E5D40097B49C /* RNVectorIcons.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* Dekorman */,
@@ -323,6 +383,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		69F7155523F3E1210097B49C /* libReactNativeMidtrans.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeMidtrans.a;
+			remoteRef = 69F7155423F3E1210097B49C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69F7155E23F3E5D40097B49C /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 69F7155D23F3E5D40097B49C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69F7156023F3E5D40097B49C /* libRNVectorIcons-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNVectorIcons-tvOS.a";
+			remoteRef = 69F7155F23F3E5D40097B49C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -338,6 +422,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				69F7156323F3E6980097B49C /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +492,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B55E22460380E9CDBBEE3CD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dekorman/Pods-Dekorman-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MidtransKit/MidtransKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MidtransKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dekorman/Pods-Dekorman-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B07852503A495A5294EE2F18 /* [CP] Check Pods Manifest.lock */ = {
