@@ -22,8 +22,6 @@ import Search from './screens/Search';
 import Profil from './screens/Profil';
 import Pesanan from './screens/Pesanan';
 import AuthLoading from './screens/AuthLoading';
-import AuthProfile from './screens/AuthProfile';
-import AuthPesanan from './screens/AuthPesanan';
 import Pesananblmlogin from './screens/Pesananblmlogin';
 
 //import Payment from './screens/Payment';
