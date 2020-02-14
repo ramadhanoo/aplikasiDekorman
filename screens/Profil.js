@@ -17,7 +17,7 @@ export default class Profil extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text onPress={() => this.props.navigation.navigate("Login")}>Profil</Text>
+                
                 
             </View>
         );

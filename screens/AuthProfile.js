@@ -7,13 +7,13 @@ import {
   View,
 } from 'react-native';
 
-export default class AuthLoading extends Component {
+export default class AuthProfile extends Component {
   componentDidMount() {
     this._bootstrapAsync();
   }
 
   static navigationOptions = {
-    header: null
+    header: null,
   }
 
   // Fetch the token from storage then navigate to our appropriate place
@@ -24,16 +24,16 @@ export default class AuthLoading extends Component {
     // screen will be unmounted and thrown away.
     //this.props.navigation.navigate(userToken ? 'LoginStack' : 'Tab');
     if(userToken) {
-      this.props.navigation.navigate('Tab');
+        this.props.navigation.navigate('Profile');
     } else {
-      this.props.navigation.navigate('Tab');
+        this.props.navigation.navigate('Login');
     }
   };
 
   // Render any loading content that you like here
   render() {
     return (
-      <View>
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
       </View>

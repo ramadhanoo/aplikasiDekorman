@@ -6,10 +6,11 @@ import {
   View,
   Text,
   StatusBar,
+  AsyncStorage
 } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-//import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -21,6 +22,10 @@ import Search from './screens/Search';
 import Profil from './screens/Profil';
 import Pesanan from './screens/Pesanan';
 import AuthLoading from './screens/AuthLoading';
+import AuthProfile from './screens/AuthProfile';
+import AuthPesanan from './screens/AuthPesanan';
+import Pesananblmlogin from './screens/Pesananblmlogin';
+
 //import Payment from './screens/Payment';
 
 //Home
@@ -36,6 +41,7 @@ const KategoriStack = createStackNavigator({
 //pesanan
 const PesananStack = createStackNavigator({
   Pesanan: Pesanan,
+  Pesananblmlogin: Pesananblmlogin
 });
 
 const ProfilStack = createStackNavigator({
@@ -99,8 +105,9 @@ SearchStack.navigationOptions = ({ navigation }) => {
 
 PesananStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 0) {
+  if (navigation.state.index > 1) {
     tabBarVisible = false;
+    console.log(navigation.state.index);
   }
 
   return {
@@ -111,6 +118,15 @@ PesananStack.navigationOptions = ({ navigation }) => {
       
       return <Icon size={24}  name='ios-cart' color={tintColor}  />;
     },
+    tabBarOnPress: async({ navigation }) => {
+      const userToken = await AsyncStorage.getItem('user');
+      //console.log(userToken);
+      if(userToken != null) {
+        navigation.navigate("Pesanan");
+      } else {
+        navigation.navigate("Pesananblmlogin");
+      }
+    }
   };
 };
 
@@ -127,6 +143,17 @@ ProfilStack.navigationOptions = ({ navigation }) => {
       
       return <Icon size={24}  name='ios-contact' color={tintColor}  />;
     },
+
+    tabBarOnPress: async({ navigation }) => {
+      const userToken = await AsyncStorage.getItem('user');
+      //console.log(userToken);
+      if(userToken != null) {
+        navigation.navigate("Profil");
+      } else {
+        navigation.navigate("Login");
+      }
+    }
+
   };
 };
 
@@ -140,8 +167,10 @@ const Tab = createMaterialBottomTabNavigator({
 }, {
   initialRouteName: 'HomeStack',
   activeColor: '#8b0000',
-  inactiveColor: '#dcdcdc',
+  inactiveColor: '#000000',
+  resetOnBlur: true,
   shifting: true,
+  labeled: true,
   barStyle: { backgroundColor: '#fff', paddingBottom: 10 }
 })
 
