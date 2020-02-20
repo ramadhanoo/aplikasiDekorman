@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
   AsyncStorage
 } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+//import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import User from './config/User';
 
 import Home from './screens/Home';
 import Login from './screens/Login';
@@ -23,10 +18,42 @@ import Profil from './screens/Profil';
 import Pesanan from './screens/Pesanan';
 import AuthLoading from './screens/AuthLoading';
 import Pesananblmlogin from './screens/Pesananblmlogin';
-
+import Register from './screens/Register';
+import Regis2 from './screens/Regis2';
+import Finalregis from './screens/Finalregis';
+import { Avatar } from 'react-native-paper';
+import Data from './config/Data';
 //import Payment from './screens/Payment';
+var dio = 'd';
 
+//console.log(User);
+//console.log(User);
 //Home
+
+var coba = async ()  => {
+  try {
+    const userToken = await AsyncStorage.getItem('user');
+    let jsonObject = JSON.parse(userToken);
+    var ini;
+    if(jsonObject != null) {
+      ini = false
+    } else {
+      ini = false
+    }
+    return ini;
+  } catch (error) {
+    
+  }
+}
+
+
+
+
+
+
+
+
+
 const HomeStack = createStackNavigator({
   Home: Home,
 });
@@ -44,7 +71,10 @@ const PesananStack = createStackNavigator({
 
 const ProfilStack = createStackNavigator({
   Profil: Profil,
-  Login: Login
+  Login: Login,
+  Register: Register,
+  Regis2: Regis2,
+  Finalregis: Finalregis
 });
 
 const SearchStack = createStackNavigator({
@@ -58,13 +88,14 @@ HomeStack.navigationOptions = ({ navigation }) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
+  
 
   return {
     tabBarVisible,
     tabBarLabel: 'Home',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      
-      return <Icon size={24}  name='md-home' color={tintColor}  />;
+
+      return <Icon size={24} name='md-home' color={tintColor} />;
     },
   };
 };
@@ -77,10 +108,10 @@ KategoriStack.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarVisible,
-    tabBarLabel: 'Kategori',    
+    tabBarLabel: 'Kategori',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      
-      return <Icon size={24}  name='ios-albums' color={tintColor}  />;
+
+      return <Icon size={24} name='ios-albums' color={tintColor} />;
     },
   };
 };
@@ -93,10 +124,10 @@ SearchStack.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarVisible,
-    tabBarLabel: 'Search',    
+    tabBarLabel: 'Search',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      
-      return <Icon size={24}  name='md-search' color={tintColor}  />;
+
+      return <Icon size={24} name='md-search' color={tintColor} />;
     },
   };
 };
@@ -110,42 +141,42 @@ PesananStack.navigationOptions = ({ navigation }) => {
 
   return {
     tabBarVisible,
-    tabBarLabel: 'Pesanan',   
-    tabBarBadge: 3, 
+    tabBarLabel: 'Pesanan',
+    tabBarBadge: 3,
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      
-      return <Icon size={24}  name='ios-cart' color={tintColor}  />;
+
+      return <Icon size={24} name='ios-cart' color={tintColor} />;
     },
-    tabBarOnPress: async({ navigation }) => {
+    tabBarOnPress: async ({ navigation }) => {
       const userToken = await AsyncStorage.getItem('user');
       //console.log(userToken);
-      if(userToken != null) {
+      if (userToken != null) {
         navigation.navigate("Pesanan");
       } else {
         navigation.navigate("Pesananblmlogin");
       }
-    }
+    },
   };
 };
 
 ProfilStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 1) {
+  if (navigation.state.index > 4) {
     tabBarVisible = false;
   }
 
   return {
     tabBarVisible,
-    tabBarLabel: 'Profil',    
+    tabBarLabel: 'Profil',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      
-      return <Icon size={24}  name='ios-contact' color={tintColor}  />;
+
+      return <Icon size={24} name='ios-contact' color={tintColor} />;
     },
 
-    tabBarOnPress: async({ navigation }) => {
-      const userToken = await AsyncStorage.getItem('user');
+    tabBarOnPress: async ({ navigation }) => {
+      var userToken = await AsyncStorage.getItem('user');
       //console.log(userToken);
-      if(userToken != null) {
+      if (userToken != null) {
         navigation.navigate("Profil");
       } else {
         navigation.navigate("Login");
@@ -155,14 +186,15 @@ ProfilStack.navigationOptions = ({ navigation }) => {
   };
 };
 
-//tab
-const Tab = createMaterialBottomTabNavigator({
-  HomeStack: HomeStack,
-  KategoriStack: KategoriStack,
-  SearchStack: SearchStack,
-  PesananStack: PesananStack,
-  ProfilStack: ProfilStack,
-}, {
+const Tab = createMaterialBottomTabNavigator(
+  {
+    HomeStack: HomeStack,
+    KategoriStack: KategoriStack,
+    SearchStack: SearchStack,
+    PesananStack: PesananStack,
+    ProfilStack: ProfilStack,
+  }, {
+    
   initialRouteName: 'HomeStack',
   activeColor: '#8b0000',
   inactiveColor: '#000000',

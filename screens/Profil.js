@@ -21,7 +21,6 @@ export default class Profil extends Component {
     }
 
     render() {
-        console.log(User);
         return (
             <View style={styles.container}>
                 
