@@ -25,7 +25,7 @@ export default class Payment extends Component {
 
   async prosses() {
     try {
-      return fetch(`http://192.168.1.7:3000/pay`, {
+      return fetch(`http://192.168.1.4:3000/pay`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

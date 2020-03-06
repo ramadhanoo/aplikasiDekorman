@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904131581893",
+    "firebase_url": "https://dekorman-5e41d.firebaseio.com",
+    "project_id": "dekorman-5e41d",
+    "storage_bucket": "dekorman-5e41d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904131581893:android:89212f25c09fd445de5dac",
+        "android_client_info": {
+          "package_name": "com.dekorman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904131581893-phk5rfc538njgeso7dk62a2lk4o4f1k9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dekorman",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "904131581893-hnoirmo00qpqb4edptkjsoq47ebolfvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGMat-fPmACbzNyiBVcK7n9FA-1beo4ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904131581893-hnoirmo00qpqb4edptkjsoq47ebolfvo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

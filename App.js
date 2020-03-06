@@ -24,7 +24,7 @@ import Finalregis from './screens/Finalregis';
 import { Avatar } from 'react-native-paper';
 import Data from './config/Data';
 //import Payment from './screens/Payment';
-var dio = 'd';
+
 
 //console.log(User);
 //console.log(User);

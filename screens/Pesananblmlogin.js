@@ -17,6 +17,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from '../config/User';
 import * as Animatable from 'react-native-animatable';
+
 const { height, width } = Dimensions.get("window");
 
 
