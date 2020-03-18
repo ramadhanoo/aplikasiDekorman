@@ -10,12 +10,14 @@ import {
     Alert,
     Dimensions,
     ImageBackground,
-    AsyncStorage
+    AsyncStorage,
+    ActivityIndicator
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import User from '../config/User';
 const layar = Dimensions.get("window");
 //import { Ip } from '../static/Ip';
+import { Ip } from '../config/Ip';
 
 export default class Regis2 extends Component {
     constructor(props) {
@@ -27,7 +29,9 @@ export default class Regis2 extends Component {
             password: '',
             errorTel: '',
             errorPass: '',
-            errorNama: ''
+            errorNama: '',
+            loading: false,
+            loadingFull: false
         }
     }
 
@@ -38,6 +42,11 @@ export default class Regis2 extends Component {
 
     handleViewRef = ref => this.view = ref;
 
+    lanjutLogin() {
+        this.setState({ loading: false })
+        this.props.navigation.navigate("Login")
+    }
+
     async save() {
         var verif = this.state.no_tlp.slice(0, 2);
 
@@ -46,7 +55,7 @@ export default class Regis2 extends Component {
             //this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
         }
 
-        if(this.state.no_tlp.length != 0) {
+        if (this.state.no_tlp.length != 0) {
             this.setState({ errorTel: '' })
             //this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
         }
@@ -78,11 +87,11 @@ export default class Regis2 extends Component {
         } else if (verif != '08') {
             this.setState({ errorTel: 'Format Telepon Salah' })
             this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-            
+
         } else if (this.state.no_tlp.length <= 11) {
             this.setState({ errorTel: 'Nomer Telepon Harus Lebih Dari 11 Digit' })
             this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-            
+
         } else if (this.state.nama.length == 0) {
             this.setState({ errorNama: 'nama Harus Di Isi' })
             this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
@@ -97,8 +106,8 @@ export default class Regis2 extends Component {
             console.log(this.state.no_tlp)
             console.log(this.state.nama)
             console.log(this.state.password)
-
-            fetch('http://192.168.1.5:3000/teleponVerification', {
+            this.setState({ loading: true })
+            fetch(`http://${Ip}:3000/teleponVerification2`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -114,7 +123,7 @@ export default class Regis2 extends Component {
                     console.log(responseJson);
                     if (responseJson == "berhasil") {
                         //alert("valid")
-                        fetch('http://192.168.1.5:3000/sendEmail', {
+                        fetch(`http://${Ip}:3000/sendEmail`, {
                             method: 'POST',
                             headers: {
                                 Accept: 'application/json',
@@ -128,18 +137,20 @@ export default class Regis2 extends Component {
                             .then((responseJson) => {
 
                                 console.log(responseJson);
+                                this.setState({ loading: false })
                                 this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password, verif: responseJson });
 
                             });
                         //this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password });
                     } else {
+                        this.setState({ loading: false })
                         Alert.alert(
                             this.state.no_tlp,
                             'Nomer Telepon Sudah Terdaftar',
                             [
-                                { text: 'Koreksi', onPress: () => console.log('Ask me later pressed') },
+                                { text: 'Koreksi', onPress: () => this.setState({ loading: false }) },
 
-                                { text: 'Login', onPress: () => this.props.navigation.navigate("Login") },
+                                { text: 'Login', onPress: () => this.lanjutLogin() },
                             ],
                             { cancelable: false },
                         );
@@ -147,7 +158,7 @@ export default class Regis2 extends Component {
                 });
 
 
-            this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password, verif: responseJson });
+            //this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password, verif: responseJson });
         }
 
     }
@@ -192,7 +203,7 @@ export default class Regis2 extends Component {
                 </View>
 
                 <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.save()}>
-                    <Text style={styles.loginText}>Register</Text>
+                    {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Register</Text>)}
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.navigate("Login")}>

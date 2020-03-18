@@ -19,7 +19,7 @@
 		36C80483FB9DFC32E058AEA6 /* libPods-DekormanTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 922EBADEBBC2A7197FE9922C /* libPods-DekormanTests.a */; };
 		595FDF56E9E84AF6F412F4DA /* libPods-Dekorman.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE142FF9570E688C0D76E46 /* libPods-Dekorman.a */; };
 		6918219924057667000CFE5D /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6918219824057667000CFE5D /* libRNGoogleSignin.a */; };
-		69384F9024058AE400E7EFD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69384F8F24058AE400E7EFD9 /* GoogleService-Info.plist */; };
+		69BA4B7E24221E8F00676A6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69BA4B7D24221E8F00676A6F /* GoogleService-Info.plist */; };
 		69F7155723F3E13C0097B49C /* libReactNativeMidtrans.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F7155623F3E13C0097B49C /* libReactNativeMidtrans.a */; };
 		B097ED2B207F1E17E6784FBF /* libPods-Dekorman-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF9B622D7CCB0B9843DBE6 /* libPods-Dekorman-tvOSTests.a */; };
 		FB87FA6DAA09A2B05A8D70E4 /* libPods-Dekorman-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A16AD366F3CDDFEF8D6248AE /* libPods-Dekorman-tvOS.a */; };
@@ -61,6 +61,13 @@
 			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
 			remoteInfo = "RNVectorIcons-tvOS";
 		};
+		6927AFB224222B4B0055631D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6927AFAB24222B4A0055631D /* RNCAsyncStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNCAsyncStorage;
+		};
 		69F7155423F3E1210097B49C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */;
@@ -93,12 +100,13 @@
 		691821BB24057BF1000CFE5D /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		691821CE24057CA7000CFE5D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		691821D724057CE1000CFE5D /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		69384F8F24058AE400E7EFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6927AFAB24222B4A0055631D /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		6955A7622405804000807DC0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6955A7682405806100807DC0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6955A76B240580A800807DC0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6955A76F240582BC00807DC0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6955A7712405830B00807DC0 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		69BA4B7D24221E8F00676A6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeMidtrans.xcodeproj; path = "../node_modules/@adrianha/react-native-midtrans/ios/ReactNativeMidtrans.xcodeproj"; sourceTree = "<group>"; };
 		69F7155623F3E13C0097B49C /* libReactNativeMidtrans.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactNativeMidtrans.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F5117D675F820CB4F098D5 /* Pods-Dekorman-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dekorman-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Dekorman-tvOSTests/Pods-Dekorman-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,7 +181,7 @@
 		13B07FAE1A68108700A75B9A /* Dekorman */ = {
 			isa = PBXGroup;
 			children = (
-				69384F8F24058AE400E7EFD9 /* GoogleService-Info.plist */,
+				69BA4B7D24221E8F00676A6F /* GoogleService-Info.plist */,
 				691821A924057B3F000CFE5D /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -234,6 +242,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6927AFAC24222B4A0055631D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6927AFB324222B4B0055631D /* libRNCAsyncStorage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		69F7155123F3E1210097B49C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +261,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6927AFAB24222B4A0055631D /* RNCAsyncStorage.xcodeproj */,
 				691821CE24057CA7000CFE5D /* RNVectorIcons.xcodeproj */,
 				6918218F24057638000CFE5D /* RNGoogleSignin.xcodeproj */,
 				69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */,
@@ -417,6 +434,10 @@
 					ProjectRef = 69F7155023F3E1210097B49C /* ReactNativeMidtrans.xcodeproj */;
 				},
 				{
+					ProductGroup = 6927AFAC24222B4A0055631D /* Products */;
+					ProjectRef = 6927AFAB24222B4A0055631D /* RNCAsyncStorage.xcodeproj */;
+				},
+				{
 					ProductGroup = 6918219024057638000CFE5D /* Products */;
 					ProjectRef = 6918218F24057638000CFE5D /* RNGoogleSignin.xcodeproj */;
 				},
@@ -457,6 +478,13 @@
 			remoteRef = 691821D524057CA7000CFE5D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		6927AFB324222B4B0055631D /* libRNCAsyncStorage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCAsyncStorage.a;
+			remoteRef = 6927AFB224222B4B0055631D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		69F7155523F3E1210097B49C /* libReactNativeMidtrans.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -480,7 +508,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				69384F9024058AE400E7EFD9 /* GoogleService-Info.plist in Resources */,
+				69BA4B7E24221E8F00676A6F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

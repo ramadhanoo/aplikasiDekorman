@@ -19,16 +19,13 @@ import { Ip } from '../config/Ip';
 
 const { height, width } = Dimensions.get('window');
 
-export default class Finalregis extends Component {
+export default class Lupapass2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: props.navigation.getParam("email"),
-            no_tlp: props.navigation.getParam("no_tlp"),
-            password: props.navigation.getParam("password"),
-            nama: props.navigation.getParam("nama"),
             kode: '',
             verif: props.navigation.getParam("verif"),
+            email: props.navigation.getParam("email"),
             loading: false,
             loadingFull: false
         };
@@ -72,57 +69,10 @@ export default class Finalregis extends Component {
         console.log(typeof (cod));
         this.setState({ loading: true })
         if (cod == this.state.verif) {
-            alert("berhasil");
+            this.setState({ loading: false })
+            this.props.navigation.navigate("Lupapass3", { email: this.state.email });
             
-             return fetch(`http://${Ip}:3000/register`, {
-                 method: 'POST',
-                 headers: {
-                     Accept: 'application/json',
-                     'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({
-                     email: this.state.email,
-                     no_tlp: this.state.no_tlp,
-                     password: this.state.password,
-                     nama: this.state.nama
-                 })
-             })
-                 .then((response) => response.json())
-                 .then((responseJson) => {
-                     if (responseJson == "gagal") {
-                         //this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-                         alert("User Tidak Di Temukan");
-                         this.setState({ loading: false })
-                     } else {
-                         //console.log(responseJson[0]);
-
-                         console.log(responseJson);
-                         var data = {
-                             id_user: '',
-                             username: '',
-                             email: this.state.email,
-                             password: this.state.password,
-                             jk: '',
-                             no_tlp: this.state.no_tlp,
-                             nama: this.state.nama,
-                             alamat: '',
-                             avatar_user: '',
-                         }
-
-                         AsyncStorage.setItem('user', JSON.stringify(data));
-                         User.id_user = '';
-                         User.username = '';
-                         User.email = this.state.email;
-                         User.password = this.state.password;
-                         User.jk = '';
-                         User.no_tlp = this.state.no_tlp;
-                         User.nama = this.state.nama;
-                         User.alamat = '';
-                         User.avatar_user = '';
-                         this.setState({ loading: false })
-                         this.props.navigation.navigate("AuthLoading");
-                     }
-                 });
+             
         } else {
             this.setState({ loading: false })
             alert("kode tidak valid");

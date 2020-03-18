@@ -10,60 +10,41 @@ import {
   Alert,
   Dimensions,
   ImageBackground,
-  AsyncStorage,
+
   TouchableHighlight,
   Platform,
-  ScrollView
+  ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 const layar = Dimensions.get("window");
 import Icon from 'react-native-vector-icons/Ionicons';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
-
+import User from '../config/User'
+const { width, height } = Dimensions.get("window");
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading: false,
+      loadingFull: false
+    };
   }
 
-  signOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      this.setState({ user: null }); // Remember to remove the user from your app's state as well
-      console.log("success");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  static navigationOptions = {
+    title: "Home",
+    headerBackTitle: null
+}
+
+
 
 
 
   render() {
+    console.log(User);
     return (
-      <View style={styles.container}>
-        <Icon name="md-menu" size={30} />
-        <Text onPress={() => this.props.navigation.navigate("Payment")}>Bismilah</Text>
-        <LoginButton
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("login has error: " + result.error);
-              } else if (result.isCancelled) {
-                console.log("login is cancelled.");
-              } else {
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    console.log(data.accessToken.toString())
-                  }
-                )
-              }
-            }
-          }
-          onLogoutFinished={() => console.log("logout.")} />
-        <TouchableOpacity onPress={() => this.signOut()}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+      <View style={{flex: 1, alignItems:'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+        <Text>sasasa</Text>
       </View>
     );
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>904131581893-hnoirmo00qpqb4edptkjsoq47ebolfvo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.904131581893-8dstvees1vo1lbb8c8dfgje27j91jb8r</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>904131581893-podkul03gte4gplifkb70o6ctm0rdmb3.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkbacDGJhqlVnJz0GRvP4XCkNLxiA3ZlI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>904131581893</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.reactjs.native.example.Dekorman</string>
+	<key>PROJECT_ID</key>
+	<string>dekorman-5e41d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dekorman-5e41d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:904131581893:ios:7981641b44e50f03de5dac</string>
+	<key>DATABASE_URL</key>
+	<string>https://dekorman-5e41d.firebaseio.com</string>
+</dict>
+</plist>

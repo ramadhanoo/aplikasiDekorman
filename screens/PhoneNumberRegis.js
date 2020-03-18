@@ -19,7 +19,7 @@ import { Ip } from '../config/Ip';
 
 const { height, width } = Dimensions.get('window');
 
-export default class Phonenumber extends Component {
+export default class PhoneNumberRegis extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,11 +37,11 @@ export default class Phonenumber extends Component {
     }
 
     componentDidMount() {
-        alert(this.props.navigation.getParam("email"));
+        alert(this.props.navigation.getParam("verif"));
     }
 
     async kirimUlang() {
-        this.setState({ loading1: true });
+        this.setState({ loading1: true })
         fetch(`http://${Ip}:3000/kirimulangnomor`, {
             method: 'POST',
             headers: {
@@ -56,7 +56,7 @@ export default class Phonenumber extends Component {
             .then((responseJson) => {
 
                 console.log(responseJson);
- 
+                alert(responseJson);
                 this.setState({ verif: responseJson, loading1: false })
                 //this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password, verif: responseJson });
 
@@ -67,62 +67,13 @@ export default class Phonenumber extends Component {
 
         var cod = parseInt(this.state.kode)
         console.log(typeof (cod));
-        this.setState({ loading1: true })
+
         if (cod == this.state.verif) {
-            alert("berhasil");
-            return fetch(`http://${Ip}:3000/loginNumber`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: this.state.email,
-                })
-            })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    if (responseJson == "gagal") {
-                        alert("gagal")
-                        this.setState({ loading1: false })
-                        // this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-                        // this.setState({ errorPass: "Username Atau Password Salah" })
-                    } else {
-                        this.setState({ loading1: false })
-                        console.log(responseJson[0]);
-                        var data = {
-                            id_user: responseJson[0].id_user ? responseJson[0].id_user : '',
-                            username: responseJson[0].username ? responseJson[0].username : '',
-                            email: responseJson[0].email ? responseJson[0].email : '',
-                            password: responseJson[0].password ? responseJson[0].password : '',
-                            jk: responseJson[0].jk ? responseJson[0].jk : '',
-                            no_tlp: responseJson[0].no_tlp ? responseJson[0].no_tlp : '',
-                            nama: responseJson[0].nama ? responseJson[0].nama : '',
-                            alamat: responseJson[0].alamat ? responseJson[0].alamat : '',
-                            avatar_user: responseJson[0].avatar_user ? responseJson[0].avatar_user : '',
-                        }
-
-                        console.log("ini data");
-                        console.log(data);
-
-                        AsyncStorage.setItem('user', JSON.stringify(data));
-                        User.id_user = responseJson[0].id_user ? responseJson[0].id_user : '';
-                        User.username = responseJson[0].username ? responseJson[0].username : '';
-                        User.email = responseJson[0].email ? responseJson[0].email : '';
-                        User.password = responseJson[0].password ? responseJson[0].password : '';
-                        User.jk = responseJson[0].jk ? responseJson[0].jk : '';
-                        User.no_tlp = responseJson[0].no_tlp ? responseJson[0].no_tlp : '';
-                        User.nama = responseJson[0].nama ? responseJson[0].nama : '';
-                        User.alamat = responseJson[0].alamat ? responseJson[0].alamat : '';
-                        User.avatar_user = responseJson[0].avatar_user ? responseJson[0].avatar_user : '';
-
-                        this.props.navigation.navigate("AuthLoading");
-                    }
-                });
-
+            
+            this.props.navigation.navigate("NomorFinal", { email: this.state.email, verif: this.state.verif })
+            
         } else {
             alert("kode tidak valid");
-            this.setState({ loading1: false })
         }
 
     }
@@ -148,7 +99,7 @@ export default class Phonenumber extends Component {
                     <View style={{ backgroundColor: '#fff', width: width, height: Platform.OS == "ios" ? height / 7.90 : height / 12.10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold', color: '#696969', paddingTop: 20, textAlign: 'center' }}>Anda Tidak Mendapatkan Kode?</Text>
                         <TouchableHighlight style={{ backgroundColor: '#fff', height: 20, width: 130 }} onPress={() => this.kirimUlang()}>
-                            {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ fontWeight: 'bold', color: '#8b0000', textAlign: 'center', paddingTop: 5 }}>kirim Ulang Kode</Text>)}
+                        {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ fontWeight: 'bold', color: '#8b0000', textAlign: 'center', paddingTop: 5 }}>kirim Ulang Kode</Text>)}
                         </TouchableHighlight>
                     </View>
                 </View>

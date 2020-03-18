@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@adrianha/react-native-midtrans": "^1.0.0",
+    "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/google-signin": "^3.0.4",
     "@react-native-community/masked-view": "^0.1.6",
     "react": "16.9.0",

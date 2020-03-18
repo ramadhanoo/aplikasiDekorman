@@ -4,20 +4,29 @@ import {
     View,
     Text,
     TouchableHighlight,
-    AsyncStorage
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from '../config/User';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Profil extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            loading: false
+        };
     }
 
     async logout() {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate("Login");
+        this.setState({ loading: true })
+        await AsyncStorage.clear((call) => {
+            this.setState({ loading: false })
+            this.props.navigation.navigate("Login");
+        }, (err) =>  {
+            console.log(err);
+        });
+        
     }
 
     render() {
@@ -25,7 +34,7 @@ export default class Profil extends Component {
             <View style={styles.container}>
                 
                 <TouchableHighlight style={{ backgroundColor: 'red', height: 50, width: 120, borderRadius: 10, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.logout()}>
-                    <Text style={{ fontWeight: 'bold', color: '#fff' }}>Logout</Text>
+                {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ fontWeight: 'bold', color: '#fff' }}>Logout</Text>)}
                 </TouchableHighlight>
             </View>
         );

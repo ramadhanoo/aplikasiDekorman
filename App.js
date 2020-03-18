@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {
-  AsyncStorage
-} from 'react-native';
+
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 //import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from './config/User';
 
@@ -21,6 +19,12 @@ import Pesananblmlogin from './screens/Pesananblmlogin';
 import Register from './screens/Register';
 import Regis2 from './screens/Regis2';
 import Finalregis from './screens/Finalregis';
+import Phonenumber from './screens/Phonenumber';
+import PhoneNumberRegis from './screens/PhoneNumberRegis';
+import NomorFinal from './screens/NomorFinal';
+import Lupapass1 from './screens/Lupapass1';
+import Lupapass2 from './screens/Lupapass2';
+import Lupapass3 from './screens/Lupapass3';
 import { Avatar } from 'react-native-paper';
 import Data from './config/Data';
 //import Payment from './screens/Payment';
@@ -30,19 +34,19 @@ import Data from './config/Data';
 //console.log(User);
 //Home
 
-var coba = async ()  => {
+var coba = async () => {
   try {
     const userToken = await AsyncStorage.getItem('user');
     let jsonObject = JSON.parse(userToken);
     var ini;
-    if(jsonObject != null) {
+    if (jsonObject != null) {
       ini = false
     } else {
       ini = false
     }
     return ini;
   } catch (error) {
-    
+
   }
 }
 
@@ -74,7 +78,13 @@ const ProfilStack = createStackNavigator({
   Login: Login,
   Register: Register,
   Regis2: Regis2,
-  Finalregis: Finalregis
+  Finalregis: Finalregis,
+  Phonenumber: Phonenumber,
+  PhoneNumberRegis: PhoneNumberRegis,
+  NomorFinal: NomorFinal,
+  Lupapass1: Lupapass1,
+  Lupapass2: Lupapass2,
+  Lupapass3: Lupapass3
 });
 
 const SearchStack = createStackNavigator({
@@ -88,7 +98,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-  
+
 
   return {
     tabBarVisible,
@@ -194,7 +204,7 @@ const Tab = createMaterialBottomTabNavigator(
     PesananStack: PesananStack,
     ProfilStack: ProfilStack,
   }, {
-    
+
   initialRouteName: 'HomeStack',
   activeColor: '#8b0000',
   inactiveColor: '#000000',
