@@ -183,7 +183,7 @@ export default class Lupapass1 extends Component {
 
                         </Animatable.View>
 
-                        <TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.masuk()} disabled={this.state.emailvalidation ? false : true}>
+                        <TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.masuk()} disabled={this.state.loading1 == false ? false : true}>
                             {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Selesai</Text>)}
                         </TouchableOpacity>
 

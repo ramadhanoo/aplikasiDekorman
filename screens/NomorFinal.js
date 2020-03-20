@@ -10,7 +10,6 @@ import {
     Alert,
     Dimensions,
     ImageBackground,
-    AsyncStorage,
     TouchableHighlight,
     Platform,
     ScrollView,
@@ -25,6 +24,7 @@ import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-com
 //import { Ip } from '../static/Ip';
 import { LoginManager, AccessToken } from "react-native-fbsdk";
 import { Ip } from '../config/Ip';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { height, width } = Dimensions.get("window");
 
@@ -62,6 +62,7 @@ export default class NomorFinal extends Component {
             body: JSON.stringify({
                 email: this.state.email,
                 nama: this.state.nama,
+                loginWith: 'telepon'
             })
         })
             .then((response) => response.json())
@@ -84,6 +85,7 @@ export default class NomorFinal extends Component {
                         nama: this.state.nama,
                         alamat: '',
                         avatar_user: '',
+                        loginWith: 'telepon',
                     }
 
                     AsyncStorage.setItem('user', JSON.stringify(data));
@@ -96,6 +98,7 @@ export default class NomorFinal extends Component {
                     User.nama = this.state.nama;
                     User.alamat = '';
                     User.avatar_user = '';
+                    User.loginWith = 'telepon';
                     this.setState({ loading: false });
                     this.props.navigation.navigate("AuthLoading");
                 }
@@ -137,7 +140,7 @@ export default class NomorFinal extends Component {
 
 
                         <View style={{ width: layar.width / 1.20, backgroundColor: '#fff', height: 200, marginTop: 10 }}>
-                            <TouchableOpacity style={!this.state.disable ? styles.buttonDisable : styles.buttonTdkDisable} onPress={() => this.proses()} disabled={this.state.disable}>
+                            <TouchableOpacity style={!this.state.disable ? styles.buttonDisable : styles.buttonTdkDisable} onPress={() => this.proses()} disabled={this.state.loading == false ? false : true}>
                             {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ fontWeight: 'bold', color: '#fff' }}>Selesai</Text>)}
                             </TouchableOpacity>
                         </View>

@@ -286,7 +286,7 @@ export default class Register extends Component {
                     </Animatable.View>
 
 
-                    <TouchableOpacity style={this.state.emailval == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.valid()} disabled={this.state.emailval ? false : true}>
+                    <TouchableOpacity style={this.state.emailval == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.valid()} disabled={this.state.loading == false ? false : true}>
                         {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Register</Text>)}
                     </TouchableOpacity>
 

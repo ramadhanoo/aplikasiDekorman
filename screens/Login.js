@@ -22,7 +22,10 @@ const layar = Dimensions.get("window");
 import Icon from 'react-native-vector-icons/Ionicons';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-community/google-signin';
 //import { Ip } from '../static/Ip';
-import { LoginManager, AccessToken } from "react-native-fbsdk";
+import {
+  LoginButton, AccessToken, LoginManager, GraphRequest,
+  GraphRequestManager
+} from 'react-native-fbsdk';
 import { Ip } from '../config/Ip';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -42,7 +45,10 @@ export default class Login extends Component {
       isModalSms: false,
       verif: '',
       loading1: false,
-      loadingFull: false
+      loadingFull: false,
+      facebookLogin: 'dava',
+      errorFacebook: '',
+      modalLoading: false
     }
   }
 
@@ -72,66 +78,110 @@ export default class Login extends Component {
 
   handleViewRef = ref => this.view = ref;
 
-  saveDataGoogle(userInfo) {
-
-    alert(userInfo.user.name);
-    var data = {
-      id_user: userInfo.user.id,
-      username: '',
-      email: userInfo.user.email,
-      password: '',
-      jk: '',
-      no_tlp: '',
-      nama: userInfo.user.name,
-      alamat: '',
-      avatar_user: userInfo.user.photo,
-    }
-
-    AsyncStorage.setItem('user', JSON.stringify(data));
-    User.id_user = userInfo.user.id;
-    User.username = '';
-    User.email = userInfo.user.email;
-    User.password = '';
-    User.jk = '';
-    User.no_tlp = '';
-    User.nama = userInfo.user.name;
-    User.alamat = '';
-    User.avatar_user = userInfo.user.photo;
-
-    this.props.navigation.navigate("AuthLoading");
-
-  }
-
   async loginwithgmail() {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       //console.log(userInfo);
       //alert(userInfo.user.name);
-      var data = {
-        id_user: userInfo.user.id,
-        username: '',
-        email: userInfo.user.email,
-        password: '',
-        jk: '',
-        no_tlp: '',
-        nama: userInfo.user.name,
-        alamat: '',
-        avatar_user: userInfo.user.photo,
-      }
+      this.setState({ modalLoading: true })
+      fetch(`http://${Ip}:3000/gmailVerif`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userInfo.user.email,
+        })
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
 
-      AsyncStorage.setItem('user', JSON.stringify(data));
-      User.id_user = userInfo.user.id;
-      User.username = '';
-      User.email = userInfo.user.email;
-      User.password = '';
-      User.jk = '';
-      User.no_tlp = '';
-      User.nama = userInfo.user.name;
-      User.alamat = '';
-      User.avatar_user = userInfo.user.photo;
+          console.log(responseJson);
+          if (responseJson != "gagal") {
+            var data = {
+              id_user: responseJson[0].id_user ? responseJson[0].id_user : '',
+              username: responseJson[0].username ? responseJson[0].username : '',
+              email: responseJson[0].email ? responseJson[0].email : '',
+              password: responseJson[0].password ? responseJson[0].password : '',
+              jk: responseJson[0].jk ? responseJson[0].jk : '',
+              no_tlp: responseJson[0].no_tlp ? responseJson[0].no_tlp : '',
+              nama: responseJson[0].nama ? responseJson[0].nama : '',
+              alamat: responseJson[0].alamat ? responseJson[0].alamat : '',
+              avatar_user: responseJson[0].avatar_user ? responseJson[0].avatar_user : '',
+              loginWith: responseJson[0].loginWith ? responseJson[0].loginWith : '',
+            }
 
-      this.props.navigation.navigate("AuthLoading");
+            AsyncStorage.setItem('user', JSON.stringify(data));
+            User.id_user = responseJson[0].id_user ? responseJson[0].id_user : '';
+            User.username = responseJson[0].username ? responseJson[0].username : '';
+            User.email = responseJson[0].email ? responseJson[0].email : '';
+            User.password = responseJson[0].password ? responseJson[0].password : '';
+            User.jk = responseJson[0].jk ? responseJson[0].jk : '';
+            User.no_tlp = responseJson[0].no_tlp ? responseJson[0].no_tlp : '';
+            User.nama = responseJson[0].nama ? responseJson[0].nama : '';
+            User.alamat = responseJson[0].alamat ? responseJson[0].alamat : '';
+            User.avatar_user = responseJson[0].avatar_user ? responseJson[0].avatar_user : '';
+            User.loginWith = responseJson[0].loginWith ? responseJson[0].loginWith : '';
+            this.props.navigation.navigate("AuthLoading");
+            this.setState({ modalLoading: false })
+          } else {
+            return fetch(`http://${Ip}:3000/registerGmail`, {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: userInfo.user.email,
+                avatar_user: userInfo.user.photo,
+                nama: userInfo.user.name,
+                loginWith: 'loginGmail'
+              })
+            })
+              .then((response) => response.json())
+              .then((responseJson) => {
+                if (responseJson == "gagal") {
+                  //this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+                  alert("User Tidak Di Temukan");
+                  this.setState({ modalLoading: false })
+                } else {
+                  //console.log(responseJson[0]);
+
+                  //console.log(responseJson);
+                  var data = {
+                    id_user: '',
+                    username: '',
+                    email: userInfo.user.email,
+                    password: '',
+                    jk: '',
+                    no_tlp: '',
+                    nama: userInfo.user.name,
+                    alamat: '',
+                    avatar_user: userInfo.user.photo,
+                    loginWith: 'loginGmail'
+                  }
+
+                  AsyncStorage.setItem('user', JSON.stringify(data));
+                  User.id_user = '';
+                  User.username = '';
+                  User.email = userInfo.user.email;
+                  User.password = '';
+                  User.jk = '';
+                  User.no_tlp = '';
+                  User.nama = userInfo.user.name;
+                  User.alamat = '';
+                  User.avatar_user = userInfo.user.photo;
+                  User.loginWith = 'loginGmail';
+                  this.setState({ modalLoading: false })
+                  this.props.navigation.navigate("AuthLoading");
+                }
+              });
+
+          }
+        });
+
 
 
     } catch (error) {
@@ -148,27 +198,14 @@ export default class Login extends Component {
   }
 
   initUser(token) {
-    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-      .then((response) => response.json())
-      .then((json) => {
-        // Some user object has been set up somewhere, build that user here
-        console.log(json);
-        // user.name = json.name
-        // user.id = json.id
-        // user.user_friends = json.friends
-        // user.email = json.email
-        // user.username = json.name
-        // user.loading = false
-        // user.loggedIn = true
-        // user.avatar = setAvatar(json.id)      
-      })
-      .catch(() => {
-        reject('ERROR GETTING DATA FROM FACEBOOK')
-      })
+
   }
 
-  loginwithfacebook() {
-    LoginManager.logInWithPermissions(["public_profile"]).then(
+
+
+  async loginwithfacebook() {
+    const that = this;
+    LoginManager.logInWithPermissions(["public_profile", "email"]).then(
       function (result) {
         if (result.isCancelled) {
           console.log("Login cancelled");
@@ -177,43 +214,129 @@ export default class Login extends Component {
             (data) => {
               console.log(data.accessToken.toString())
               const { accessToken } = data
-              fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + accessToken)
+              that.setState({ modalLoading: true })
+              fetch(`https://graph.facebook.com/v2.5/me?fields=email,name,picture.type(large),friends&access_token=${accessToken}`)
                 .then((response) => response.json())
                 .then((json) => {
-                  // Some user object has been set up somewhere, build that user here
-                  console.log(json);
-                  // user.name = json.name
-                  // user.id = json.id
-                  // user.user_friends = json.friends
-                  // user.email = json.email
-                  // user.username = json.name
-                  // user.loading = false
-                  // user.loggedIn = true
-                  // user.avatar = setAvatar(json.id)
+
+
+                  fetch(`http://${Ip}:3000/gmailVerif`, {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      email: json.email,
+                    })
+                  })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+
+                      console.log(responseJson);
+                      if (responseJson != "gagal") {
+                        var data = {
+                          id_user: responseJson[0].id_user ? responseJson[0].id_user : '',
+                          username: responseJson[0].username ? responseJson[0].username : '',
+                          email: responseJson[0].email ? responseJson[0].email : '',
+                          password: responseJson[0].password ? responseJson[0].password : '',
+                          jk: responseJson[0].jk ? responseJson[0].jk : '',
+                          no_tlp: responseJson[0].no_tlp ? responseJson[0].no_tlp : '',
+                          nama: responseJson[0].nama ? responseJson[0].nama : '',
+                          alamat: responseJson[0].alamat ? responseJson[0].alamat : '',
+                          avatar_user: responseJson[0].avatar_user ? responseJson[0].avatar_user : '',
+                          loginWith: responseJson[0].loginWith ? responseJson[0].loginWith : '',
+                        }
+
+                        AsyncStorage.setItem('user', JSON.stringify(data));
+                        User.id_user = responseJson[0].id_user ? responseJson[0].id_user : '';
+                        User.username = responseJson[0].username ? responseJson[0].username : '';
+                        User.email = responseJson[0].email ? responseJson[0].email : '';
+                        User.password = responseJson[0].password ? responseJson[0].password : '';
+                        User.jk = responseJson[0].jk ? responseJson[0].jk : '';
+                        User.no_tlp = responseJson[0].no_tlp ? responseJson[0].no_tlp : '';
+                        User.nama = responseJson[0].nama ? responseJson[0].nama : '';
+                        User.alamat = responseJson[0].alamat ? responseJson[0].alamat : '';
+                        User.avatar_user = responseJson[0].avatar_user ? responseJson[0].avatar_user : '';
+                        User.loginWith = responseJson[0].loginWith ? responseJson[0].loginWith : '';
+                        that.props.navigation.navigate("AuthLoading");
+                        that.setState({ modalLoading: false })
+                      } else {
+                        return fetch(`http://${Ip}:3000/registerGmail`, {
+                          method: 'POST',
+                          headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({
+                            email: json.email,
+                            avatar_user: json.picture.data.url,
+                            nama: json.picture.data.url,
+                            loginWith: 'loginFacebook'
+                          })
+                        })
+                          .then((response) => response.json())
+                          .then((responseJson) => {
+                            if (responseJson == "gagal") {
+                              //that.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+                              alert("User Tidak Di Temukan");
+                              that.setState({ modalLoading: false })
+                            } else {
+                              //console.log(responseJson[0]);
+
+                              //console.log(responseJson);
+                              var data = {
+                                id_user: '',
+                                username: '',
+                                email: json.email,
+                                password: '',
+                                jk: '',
+                                no_tlp: '',
+                                nama: json.name,
+                                alamat: '',
+                                avatar_user: json.picture.data.url,
+                                loginWith: 'loginFacebook'
+                              }
+
+                              AsyncStorage.setItem('user', JSON.stringify(data));
+                              User.id_user = '';
+                              User.username = '';
+                              User.email = json.email;
+                              User.password = '';
+                              User.jk = '';
+                              User.no_tlp = '';
+                              User.nama = json.name;
+                              User.alamat = '';
+                              User.avatar_user = json.picture.data.url;
+                              User.loginWith = 'loginFacebook';
+                              that.setState({ modalLoading: false })
+                              that.props.navigation.navigate("AuthLoading");
+                            }
+                          });
+
+                      }
+                    });
+
                 })
                 .catch(() => {
-                  reject('ERROR GETTING DATA FROM FACEBOOK')
+                  console.log('ERROR GETTING DATA FROM FACEBOOK')
                 })
             }
           );
+
         }
+
       },
       function (error) {
         console.log("Login fail with error: " + error);
       }
     );
+
+
   }
 
   ubah() {
     this.setState({ emailval: false, errorPass: '' })
-  }
-
-  dio() {
-    return (
-      <View style={styles.container}>
-        <Text>dava</Text>
-      </View>
-    )
   }
 
   async save() {
@@ -223,8 +346,12 @@ export default class Login extends Component {
     let reg = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (reg.test(this.state.email)) {
+      this.setState({ isModalSms: true })
+
+
+    } else if (re.test(this.state.email)) {
       this.setState({ loading1: true })
-      fetch(`http://${Ip}:3000/teleponVerification`, {
+      fetch(`http://${Ip}:3000/verifikasiGmail`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -236,19 +363,23 @@ export default class Login extends Component {
       })
         .then((response) => response.json())
         .then((responseJson) => {
-
-          console.log(responseJson);
-          if (responseJson != "berhasil") {
-
-            this.setState({ isModalSms: true, loading1: false })
-          } else {
+          if (responseJson == "loginGmail") {
+            this.setState({ errorEmail: 'Silahkan Login Dengan Gmail' });
             this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-            this.setState({ errorEmail: 'Nomor Tidak Terdaftar', loading1: false });
+            this.setState({ loading1: false })
+          } else if(responseJson == "gaada") {
+            this.setState({ errorEmail: 'Akun Belum Terdaftar' });
+            this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+            this.setState({ loading1: false })
+          } else if(responseJson == "loginFacebook") {
+            this.setState({ errorEmail: 'Silahkan Login Dengan Facebook' });
+            this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+            this.setState({ loading1: false })
+          } else {
+            this.setState({ loading1: false, emailval: true })
           }
-        });
-
-    } else if (re.test(this.state.email)) {
-      this.setState({ emailval: true })
+        })
+        
     } else {
       if (this.state.email.length == 0) {
         this.setState({ errorEmail: 'Email Tidak Boleh Kosong' });
@@ -326,6 +457,7 @@ export default class Login extends Component {
               nama: responseJson[0].nama ? responseJson[0].nama : '',
               alamat: responseJson[0].alamat ? responseJson[0].alamat : '',
               avatar_user: responseJson[0].avatar_user ? responseJson[0].avatar_user : '',
+              loginWith: responseJson[0].loginWith ? responseJson[0].loginWith : '',
             }
 
             AsyncStorage.setItem('user', JSON.stringify(data));
@@ -338,7 +470,8 @@ export default class Login extends Component {
             User.nama = responseJson[0].nama ? responseJson[0].nama : '';
             User.alamat = responseJson[0].alamat ? responseJson[0].alamat : '';
             User.avatar_user = responseJson[0].avatar_user ? responseJson[0].avatar_user : '';
-            this.setState({ loading1: false })
+            User.loginWith = responseJson[0].loginWith ? responseJson[0].loginWith : '';
+            this.setState({ loading1: false });
             this.props.navigation.navigate("AuthLoading");
           }
         });
@@ -413,11 +546,11 @@ export default class Login extends Component {
   }
 
   render() {
-    var button1 = (<TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.masuk()}>
+    var button1 = (<TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.masuk()} disabled={this.state.loading1 == false ? false : true}>
       {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Masuk</Text>)}
     </TouchableOpacity>);
 
-    var button2 = (<TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.save()} disabled={this.state.emailvalidation ? false : true}>
+    var button2 = (<TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.save()} disabled={this.state.loading1 == false ? false : true}>
       {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Selanjutnya</Text>)}
     </TouchableOpacity>);
     //alert(Platform.OS);
@@ -446,6 +579,7 @@ export default class Login extends Component {
 
               </View>
               {this.state.errorEmail != '' ? <Text style={{ color: "red", fontWeight: 'bold', textAlign: 'right', paddingBottom: 20 }}>{this.state.errorEmail}</Text> : null}
+              {this.state.errorFacebook != '' ? <Text style={{ color: "red", fontWeight: 'bold', textAlign: 'right', paddingBottom: 20 }}>{this.state.errorEmail}</Text> : null}
               {this.state.emailval ? (<View style={styles.inputContainer}>
                 <TextInput style={styles.inputs}
                   placeholder="Password"
@@ -572,6 +706,26 @@ export default class Login extends Component {
 
               </View>
             </Modal>
+
+            <Modal
+              isVisible={this.state.modalLoading}
+              swipeDirection={['up', 'down']}
+              style={{ justifyContent: 'center', alignItems: 'center' }}
+              animationIn={"fadeIn"}
+              onBackdropPress={() => this.toggleModal()}
+            >
+              <View style={{
+                backgroundColor: 'white',
+                borderRadius: 10,
+                borderColor: 'rgba(0, 0, 0, 0.1)',
+              }}>
+
+                <View style={{ backgroundColor: 'black', width: layar.width / 5.50, height: layar.width / 5.50, borderRadius: 10, opacity: 1.90, alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator size={"large"} color={"#fff"}/>
+                </View>
+              </View>
+            </Modal>
+
           </View>
 
 

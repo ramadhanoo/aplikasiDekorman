@@ -227,11 +227,11 @@ export default class Lupapass1 extends Component {
 
 
   render() {
-    var button1 = (<TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.masuk()}>
+    var button1 = (<TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.masuk()} disabled={this.state.loading1 == false ? false : true}>
       {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Masuk</Text>)}
     </TouchableOpacity>);
 
-    var button2 = (<TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.save()} disabled={this.state.emailvalidation ? false : true}>
+    var button2 = (<TouchableOpacity style={this.state.emailvalidation == true ? [styles.buttonContainer, styles.loginButton] : [styles.buttonContainer, styles.loginButton2]} onPress={() => this.save()} disabled={this.state.loading == false ? false : true}>
       {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Selanjutnya</Text>)}
     </TouchableOpacity>);
     //alert(Platform.OS);

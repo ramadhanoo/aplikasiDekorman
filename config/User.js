@@ -7,7 +7,8 @@ const User = {
     no_tlp: null,
     nama: null,
     alamat: null,
-    avatar_user: null
+    avatar_user: null,
+    loginWith: null
 }
 
 export default User;

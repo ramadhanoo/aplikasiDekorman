@@ -150,7 +150,7 @@ export default class Regis2 extends Component {
                             [
                                 { text: 'Koreksi', onPress: () => this.setState({ loading: false }) },
 
-                                { text: 'Login', onPress: () => this.lanjutLogin() },
+                                
                             ],
                             { cancelable: false },
                         );
@@ -202,7 +202,7 @@ export default class Regis2 extends Component {
                     <Text style={styles.btnText}>Contoh Telepon: 085939623506</Text>
                 </View>
 
-                <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.save()}>
+                <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.save()} disabled={this.state.loading == false ? false : true}>
                     {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={styles.loginText}>Register</Text>)}
                 </TouchableOpacity>
 

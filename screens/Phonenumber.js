@@ -9,12 +9,12 @@ import {
     TextInput,
     Platform,
     TouchableHighlight,
-    AsyncStorage,
     ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from '../config/User';
 import { Ip } from '../config/Ip';
+import AsyncStorage from '@react-native-community/async-storage';
 //https://www.pngitem.com/pimgs/m/12-127052_message-clipart-mail-symbol-transparent-background-red-email.png
 
 const { height, width } = Dimensions.get('window');
@@ -37,7 +37,7 @@ export default class Phonenumber extends Component {
     }
 
     componentDidMount() {
-        alert(this.props.navigation.getParam("email"));
+        
     }
 
     async kirimUlang() {
@@ -100,6 +100,7 @@ export default class Phonenumber extends Component {
                             nama: responseJson[0].nama ? responseJson[0].nama : '',
                             alamat: responseJson[0].alamat ? responseJson[0].alamat : '',
                             avatar_user: responseJson[0].avatar_user ? responseJson[0].avatar_user : '',
+                            loginWith: responseJson[0].loginWith ? responseJson[0].loginWith : '',
                         }
 
                         console.log("ini data");
@@ -115,6 +116,7 @@ export default class Phonenumber extends Component {
                         User.nama = responseJson[0].nama ? responseJson[0].nama : '';
                         User.alamat = responseJson[0].alamat ? responseJson[0].alamat : '';
                         User.avatar_user = responseJson[0].avatar_user ? responseJson[0].avatar_user : '';
+                        User.loginWith = responseJson[0].loginWith ? responseJson[0].loginWith : '';
 
                         this.props.navigation.navigate("AuthLoading");
                     }

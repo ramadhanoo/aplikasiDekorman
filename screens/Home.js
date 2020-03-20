@@ -10,7 +10,6 @@ import {
   Alert,
   Dimensions,
   ImageBackground,
-
   TouchableHighlight,
   Platform,
   ScrollView,
@@ -33,7 +32,8 @@ export default class Home extends Component {
 
   static navigationOptions = {
     title: "Home",
-    headerBackTitle: null
+    headerBackTitle: null,
+    tabBarVisible: false
 }
 
 

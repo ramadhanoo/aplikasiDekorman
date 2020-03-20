@@ -93,12 +93,12 @@ export default class PhoneNumberRegis extends Component {
                         <TextInput placeholder="Masukan  Kode" onChangeText={(kode) => this.setState({ kode: kode })} />
                         <View style={{ backgroundColor: '#696969', width: width / 3.10, height: 1 }}></View>
                     </View>
-                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()}>
+                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()} disabled={this.state.loading1 == false ? false : true}>
                     {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ color: '#fff', fontWeight: '700' }}>Verifikasi</Text>)}
                     </TouchableHighlight>
                     <View style={{ backgroundColor: '#fff', width: width, height: Platform.OS == "ios" ? height / 7.90 : height / 12.10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold', color: '#696969', paddingTop: 20, textAlign: 'center' }}>Anda Tidak Mendapatkan Kode?</Text>
-                        <TouchableHighlight style={{ backgroundColor: '#fff', height: 20, width: 130 }} onPress={() => this.kirimUlang()}>
+                        <TouchableHighlight style={{ backgroundColor: '#fff', height: 20, width: 130 }} onPress={() => this.kirimUlang()} disabled={this.state.loading1 == false ? false : true}>
                         {this.state.loading1 ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ fontWeight: 'bold', color: '#8b0000', textAlign: 'center', paddingTop: 5 }}>kirim Ulang Kode</Text>)}
                         </TouchableHighlight>
                     </View>

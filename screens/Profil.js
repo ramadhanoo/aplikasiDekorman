@@ -20,12 +20,13 @@ export default class Profil extends Component {
 
     async logout() {
         this.setState({ loading: true })
-        await AsyncStorage.clear((call) => {
+        try {
+            await AsyncStorage.removeItem('user')
             this.setState({ loading: false })
             this.props.navigation.navigate("Login");
-        }, (err) =>  {
-            console.log(err);
-        });
+          } catch(e) {
+            console.log(e);
+          }
         
     }
 

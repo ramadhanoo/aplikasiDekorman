@@ -36,6 +36,7 @@ export default class AuthLoading extends Component {
       User.nama = data.nama;
       User.alamat = data.alamat;
       User.avatar_user = data.avatar_user;
+      User.loginWith = data.loginWith;
       this.props.navigation.navigate('Tab');
     } else {
       this.props.navigation.navigate('Tab');

@@ -96,7 +96,7 @@ export default class Lupapass2 extends Component {
                         <TextInput placeholder="Masukan  Kode" onChangeText={(kode) => this.setState({ kode: kode })} />
                         <View style={{ backgroundColor: '#696969', width: width / 3.10, height: 1 }}></View>
                     </View>
-                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()}>
+                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()} disabled={this.state.loading == false ? false : true}>
                     {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ color: '#fff', fontWeight: '700' }}>Verifikasi</Text>)}
                     </TouchableHighlight>
                     <View style={{ backgroundColor: '#fff', width: width, height: Platform.OS == "ios" ? height / 7.90 : height / 12.10, alignItems: 'center', justifyContent: 'center' }}>

@@ -9,13 +9,13 @@ import {
     TextInput,
     Platform,
     TouchableHighlight,
-    AsyncStorage,
     ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from '../config/User';
 //https://www.pngitem.com/pimgs/m/12-127052_message-clipart-mail-symbol-transparent-background-red-email.png
 import { Ip } from '../config/Ip';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { height, width } = Dimensions.get('window');
 
@@ -36,11 +36,13 @@ export default class Finalregis extends Component {
 
     static navigationOptions = {
         title: "Verifikasi Akun",
-        headerBackTitle: null
+        headerBackTitleVisible: false,
+        headerLeft: null,
+        tabBarVisible: false
     }
 
     componentDidMount() {
-        alert(this.state.verif);
+        
     }
 
     async kirimUlang() {
@@ -59,7 +61,6 @@ export default class Finalregis extends Component {
             .then((responseJson) => {
 
                 console.log(responseJson);
-                alert(responseJson);
                 this.setState({ verif: responseJson, loading: false })
                 //this.props.navigation.navigate("Finalregis", { email: this.state.email, no_tlp: this.state.no_tlp, nama: this.state.nama, password: this.state.password, verif: responseJson });
 
@@ -72,7 +73,7 @@ export default class Finalregis extends Component {
         console.log(typeof (cod));
         this.setState({ loading: true })
         if (cod == this.state.verif) {
-            alert("berhasil");
+            
             
              return fetch(`http://${Ip}:3000/register`, {
                  method: 'POST',
@@ -84,7 +85,8 @@ export default class Finalregis extends Component {
                      email: this.state.email,
                      no_tlp: this.state.no_tlp,
                      password: this.state.password,
-                     nama: this.state.nama
+                     nama: this.state.nama,
+                     loginWith: 'email'
                  })
              })
                  .then((response) => response.json())
@@ -107,6 +109,7 @@ export default class Finalregis extends Component {
                              nama: this.state.nama,
                              alamat: '',
                              avatar_user: '',
+                             loginWith: 'email'
                          }
 
                          AsyncStorage.setItem('user', JSON.stringify(data));
@@ -119,6 +122,7 @@ export default class Finalregis extends Component {
                          User.nama = this.state.nama;
                          User.alamat = '';
                          User.avatar_user = '';
+                         User.loginWith = 'email';
                          this.setState({ loading: false })
                          this.props.navigation.navigate("AuthLoading");
                      }
@@ -146,12 +150,12 @@ export default class Finalregis extends Component {
                         <TextInput placeholder="Masukan  Kode" onChangeText={(kode) => this.setState({ kode: kode })} />
                         <View style={{ backgroundColor: '#696969', width: width / 3.10, height: 1 }}></View>
                     </View>
-                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()}>
+                    <TouchableHighlight style={{ backgroundColor: '#8b0000', height: 50, width: width / 1.10, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.proses()} disabled={this.state.loading == false ? false : true}>
                     {this.state.loading ? (<ActivityIndicator size="small" color="#fff" />) : (<Text style={{ color: '#fff', fontWeight: '700' }}>Verifikasi</Text>)}
                     </TouchableHighlight>
                     <View style={{ backgroundColor: '#fff', width: width, height: Platform.OS == "ios" ? height / 7.90 : height / 12.10, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold', color: '#696969', paddingTop: 20, textAlign: 'center' }}>Anda Tidak Mendapatkan Email?</Text>
-                        <TouchableHighlight style={{ backgroundColor: '#fff', height: 20, width: 130 }} onPress={() => this.kirimUlang()}>
+                        <TouchableHighlight style={{ backgroundColor: '#fff', height: 20, width: 130 }} onPress={() => this.kirimUlang()} disabled={this.state.loading == false ? false : true}>
                         <Text style={{ fontWeight: 'bold', color: '#8b0000', textAlign: 'center', paddingTop: 5 }}>kirim Ulang Email</Text>
                         </TouchableHighlight>
                     </View>
